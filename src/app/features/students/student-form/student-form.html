@@ -1,0 +1,44 @@
+<form class="student-form" (ngSubmit)="onSubmit()">
+
+    <div class="form-group">
+    <label for="name">Student Name</label>
+    <input
+      id="name"
+      type="text"
+      name="name"
+      [(ngModel)]="newStudent.name"
+      placeholder="Enter student name">
+  </div>
+
+  <div class="form-group">
+    <label for="age">Age</label>
+    <input
+      id="age"
+      type="number"
+      name="age"
+      [(ngModel)]="newStudent.age"
+      placeholder="Enter age">
+  </div>
+
+
+      <div class="form-group">
+    <label for="grade">Grade</label>
+
+    <select
+      id="grade"
+      name="grade"
+      [(ngModel)]="newStudent.grade">
+
+      <option value="">Select Grade</option>
+      <option value="A">Grade A</option>
+      <option value="B">Grade B</option>
+      <option value="C">Grade C</option>
+      <option value="D">Grade D</option>
+
+    </select>
+      </div>
+
+     <button type="submit">
+    Add Student
+  </button>
+</form>

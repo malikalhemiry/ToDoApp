@@ -11,3 +11,17 @@
     (delete)="onDeleteTask($event)">
   </app-task-list>
 </div>
+
+<div class="container">
+  <h1>Student Manager</h1>
+  
+  <!-- نموذج الإضافة -->
+  <app-student-form (add)="onAddStudent($event)"></app-student-form>
+
+  <app-student-list
+    [students]="students()" 
+    (edit)="onEditStudent($event)" 
+    (toggle)="onToggleStudent($event)" 
+    (delete)="onDeleteStudent($event)">
+  </app-student-list>
+</div>
