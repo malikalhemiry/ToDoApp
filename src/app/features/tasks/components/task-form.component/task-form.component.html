@@ -1,0 +1,9 @@
+<form (ngSubmit)="onSubmit()" class="task-form">
+  <input 
+    type="text" 
+    [(ngModel)]="newTaskTitle" 
+    name="newTaskTitle"
+    placeholder="أضف مهمة جديدة..." 
+    class="task-input">
+  <button type="submit" class="add-btn">+ إضافة</button>
+</form>

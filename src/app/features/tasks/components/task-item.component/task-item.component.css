@@ -1,0 +1,21 @@
+.task-item {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+  gap: 10px;
+}
+.task-item.completed .task-title {
+  text-decoration: line-through;
+  color: #888;
+}
+.task-title {
+  flex: 1;
+}
+.delete-btn {
+  background: none;
+  border: none;
+  color: red;
+  cursor: pointer;
+  font-size: 18px;
+}

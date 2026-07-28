@@ -1,0 +1,13 @@
+<div class="container">
+  <h1>📋 مدير المهام</h1>
+  
+  <!-- نموذج الإضافة -->
+  <app-task-form (add)="onAddTask($event)"></app-task-form>
+
+  <!-- قائمة المهام -->
+  <app-task-list 
+    [tasks]="tasks" 
+    (toggle)="onToggleTask($event)" 
+    (delete)="onDeleteTask($event)">
+  </app-task-list>
+</div>

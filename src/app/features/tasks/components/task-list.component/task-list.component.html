@@ -1,0 +1,14 @@
+<div class="task-list">
+  <!-- إذا كانت القائمة فارغة -->
+  @if (tasks().length <= 0) {
+    <p class="empty-msg">🎉 لا توجد مهام! أضف مهمة جديدة.</p>
+  }
+  
+  <div *ngFor="let task of tasks()">
+    <app-task-item 
+      [task]="task" 
+      (toggle)="toggle.emit($event)" 
+      (delete)="delete.emit($event)">
+    </app-task-item>
+  </div>
+</div>
