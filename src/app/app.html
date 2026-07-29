@@ -1,10 +1,8 @@
 <div class="container">
   <h1>📋 مدير المهام</h1>
   
-  <!-- نموذج الإضافة -->
   <app-task-form (add)="onAddTask($event)"></app-task-form>
 
-  <!-- قائمة المهام -->
   <app-task-list 
     [tasks]="tasks" 
     (toggle)="onToggleTask($event)" 
@@ -16,7 +14,9 @@
   <h1>Student Manager</h1>
   
   <!-- نموذج الإضافة -->
-  <app-student-form (add)="onAddStudent($event)"></app-student-form>
+  <app-student-form 
+  [student]="editingStudent()"
+  (add)="onAddStudent($event)"></app-student-form>
 
   <app-student-list
     [students]="students()" 

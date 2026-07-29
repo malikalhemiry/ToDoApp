@@ -4,7 +4,7 @@ import { TaskService } from './core/services/task';
 import { TaskFormComponent } from './features/tasks/components/task-form.component/task-form.component';
 import { TaskListComponent } from './features/tasks/components/task-list.component/task-list.component';
 import { Task } from './models/task.model';
-import { CreateStudentDto, Student, UpdateStudentDto } from './models/student.model';
+import { CreateStudentDto, Student } from './models/student.model';
 import { StudentService } from './core/services/student';
 import { StudentFormComponent } from "./features/students/student-form/student-form";
 import { StudentListComponent } from "./features/students/student-list/student-list";
@@ -31,11 +31,35 @@ export class App implements OnInit {
     this.students = this.studentService.getStudents();
   }
 
-  onAddStudent(student: CreateStudentDto){
-    this.studentService.addStudent(student.name,student.age,student.grade);
+  editingStudent = signal<Student | null>(null);
+ 
+  onAddStudent(dto: CreateStudentDto){
+    const editing = this.editingStudent();
+     if (editing) {
+        this.studentService.editStudent(
+            editing.id,
+            dto.name!,
+            dto.age!,
+            dto.grade!
+        );
+
+        this.editingStudent.set(null);
+
+    } else {
+
+        this.studentService.addStudent(
+            dto.name!,
+            dto.age!,
+            dto.grade!
+        );
+
+    }
   }
-  onEditStudent(student: UpdateStudentDto){
-    this.studentService.editStudent(student.id,student.name,student.age,student.grade);
+  
+  onEditStudent(student: Student){
+    // this.studentService.editStudent(student.id,student.name,student.age,student.grade);
+    
+    this.editingStudent.set(student);
   }
   onToggleStudent(id: number){
     this.studentService.toggleActive(id);

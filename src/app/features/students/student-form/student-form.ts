@@ -1,6 +1,6 @@
-import { Component, output } from '@angular/core';
+import { Component, effect, input, output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { CreateStudentDto } from '../../../models/student.model';
+import { CreateStudentDto, Student } from '../../../models/student.model';
 
 @Component({
   selector: 'app-student-form',
@@ -15,9 +15,31 @@ export class StudentFormComponent {
     age: 0,
     grade: ''
    };
-
+   student = input<Student | null>(null);
    add = output<CreateStudentDto>();
+   constructor(){
 
+    effect(() => {
+
+        const student = this.student();
+
+        if(student){
+
+            this.newStudent = {
+
+                name: student.name,
+
+                age: student.age,
+
+                grade: student.grade
+
+            };
+
+        }
+
+    });
+
+}
    onSubmit(){
     if (
     this.newStudent.name?.trim() &&
