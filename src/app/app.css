@@ -1,12 +1,33 @@
-.container {
-  max-width: 600px;
-  margin: 50px auto;
-  padding: 20px;
-  background: #f9f9f9;
-  border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+.navbar {
+
+    display: flex;
+
+    gap: 20px;
+
+    background: #1976d2;
+
+    padding: 15px;
+
 }
-h1 {
-  text-align: center;
-  color: #333;
+
+.navbar a {
+
+    color: white;
+
+    text-decoration: none;
+
+    font-weight: bold;
+
+}
+
+.active {
+
+    border-bottom: 2px solid white;
+
+}
+
+main {
+
+    padding: 20px;
+
 }

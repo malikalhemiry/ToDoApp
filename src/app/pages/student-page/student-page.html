@@ -1,0 +1,13 @@
+<h1>Student Management</h1>
+
+<div class="container">
+  
+  <app-student-form (add)="onAddStudent($event)" [student]="editingStudent()"></app-student-form>
+
+  <app-student-list 
+    [students]="students()" 
+    (edit)="onEditStudent($event)"
+    (toggle)="onToggleStudent($event)" 
+    (delete)="onDeleteStudent($event)">
+  </app-student-list>
+</div>

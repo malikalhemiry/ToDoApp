@@ -1,27 +1,24 @@
-<div class="container">
-  <h1>📋 مدير المهام</h1>
-  
-  <app-task-form (add)="onAddTask($event)"></app-task-form>
+<header class="navbar">
 
-  <app-task-list 
-    [tasks]="tasks" 
-    (toggle)="onToggleTask($event)" 
-    (delete)="onDeleteTask($event)">
-  </app-task-list>
-</div>
+    <a routerLink="/students"
+       routerLinkActive="active">
+        Student Management
+    </a>
 
-<div class="container">
-  <h1>Student Manager</h1>
-  
-  <!-- نموذج الإضافة -->
-  <app-student-form 
-  [student]="editingStudent()"
-  (add)="onAddStudent($event)"></app-student-form>
+    <a routerLink="/tasks"
+       routerLinkActive="active">
+        Task Management
+    </a>
 
-  <app-student-list
-    [students]="students()" 
-    (edit)="onEditStudent($event)" 
-    (toggle)="onToggleStudent($event)" 
-    (delete)="onDeleteStudent($event)">
-  </app-student-list>
-</div>
+    <a routerLink="/books"
+       routerLinkActive="active">
+        Book Management
+    </a>
+
+</header>
+
+<main>
+
+    <router-outlet></router-outlet>
+
+</main>
