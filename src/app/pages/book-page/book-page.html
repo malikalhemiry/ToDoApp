@@ -1,6 +1,14 @@
 
-<div class="container">
   <h1>إدارة الكتب</h1>
 
-  <h1>Comming Soon!</h1>
+<div class="container">
+<app-book-form (add)="onAddBook($event)" [book]="editingBook()"></app-book-form>
+
+<app-book-list 
+[books]="books()"
+(delete)="onDeleteBook($event)"
+(edit)="onEditBook($event)"
+(toggle)="onToggleBook($event)"
+ ></app-book-list>
+
 </div>

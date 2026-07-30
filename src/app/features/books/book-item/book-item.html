@@ -1,0 +1,54 @@
+<div class="student-card">
+
+    <div class="student-header">
+        <h3>{{ book().title }}</h3>
+
+        <span
+            class="status"
+            [class.active]="book().isActive"
+            [class.inactive]="!book().isActive">
+
+            {{ book().isActive ? '🟢 Active' : '🔴 Inactive' }}
+
+        </span>
+    </div>
+
+    <div class="student-info">
+
+        <p>
+            <strong>Author:</strong>
+            {{ book().author }}
+        </p>
+
+        <p>
+            <strong>Year:</strong>
+            {{ book().year }}
+        </p>
+
+    </div>
+
+    <div class="student-actions">
+
+        <button
+            class="edit-btn"
+            (click)="edit.emit(book())">
+            Edit
+        </button>
+
+        <button
+            class="delete-btn"
+            (click)="delete.emit(book().id)">
+            Delete
+        </button>
+
+        <button
+            class="toggle-btn"
+            (click)="toggle.emit(book().id)">
+
+            {{ book().isActive ? 'Deactivate' : 'Activate' }}
+
+        </button>
+
+    </div>
+
+</div>

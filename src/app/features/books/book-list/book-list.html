@@ -1,0 +1,15 @@
+<div class="task-list">
+  <!-- إذا كانت القائمة فارغة -->
+  @if (books().length <= 0) {
+    <p class="empty-msg">🎉 لا يوجد كتب! أضف كتاب جديد.</p>
+  }
+  
+  <div *ngFor="let book of books()">
+    <app-book-item
+      [book]="book" 
+      (toggle)="toggle.emit($event)" 
+      (edit)="edit.emit($event)" 
+      (delete)="delete.emit($event)">
+    </app-book-item>
+  </div>
+</div>

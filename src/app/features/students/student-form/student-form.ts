@@ -15,6 +15,7 @@ export class StudentFormComponent {
     age: 0,
     grade: ''
    };
+   
    student = input<Student | null>(null);
    add = output<CreateStudentDto>();
    constructor(){

@@ -1,0 +1,35 @@
+<form class="student-form" (ngSubmit)="onSubmit()">
+
+    <div class="form-group">
+    <label for="name">Book Title</label>
+    <input
+      id="title"
+      type="text"
+      name="title"
+      [(ngModel)]="newBook.title"
+      placeholder="Enter book title">
+  </div>
+
+   <div class="form-group">
+    <label for="name">Book Author</label>
+    <input
+      id="author"
+      type="text"
+      name="author"
+      [(ngModel)]="newBook.author"
+      placeholder="Enter book author">
+  </div>
+
+  <div class="form-group">
+    <label for="age">Year</label>
+    <input
+      id="year"
+      type="number"
+      name="year"
+      [(ngModel)]="newBook.year"
+      placeholder="Enter publication year">
+  </div>
+     <button type="submit">
+    Save
+  </button>
+</form>

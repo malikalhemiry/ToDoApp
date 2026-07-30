@@ -30,9 +30,7 @@ export class StudentPageComponent implements OnInit {
               dto.age!,
               dto.grade!
           );
-  
           this.editingStudent.set(null);
-  
       } 
       else 
         {
