@@ -1,0 +1,18 @@
+
+  <h1>إدارة المعلميين</h1>
+  <div class="container">
+    <app-teacher-form (add)="onAdd($event)" [teacher]="editingTeacher()"> </app-teacher-form>
+
+        <app-teacher-list 
+        [teachers]="teachers()"
+        (edit)="onEdit($event)"
+        (delete)="onDelete($event)"
+        (toggle)="onToggle($event)"></app-teacher-list>
+        
+        <!-- <button
+            class="delete-btn"
+            (click)="onShowData()">
+            Show Data
+        </button> -->
+
+</div>

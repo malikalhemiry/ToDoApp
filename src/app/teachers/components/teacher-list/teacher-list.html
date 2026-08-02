@@ -1,0 +1,18 @@
+<div  class="task-list">
+    @if (teachers().length <= 0) {
+        <p class="empty-msg">🎉 لا يوجد معلم! أضف معلم جديد.</p>
+    }
+
+
+  @for(teacher of teachers(); track teacher.id){
+     <div>
+    <app-teacher-item
+    [teacher]="teacher"
+    (edit)="edit.emit(teacher)"
+    (delete)="delete.emit(teacher.id)"
+    (toggle)="toggle.emit(teacher.id)">
+    </app-teacher-item>
+</div>
+  }
+
+</div>

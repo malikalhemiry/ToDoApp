@@ -1,0 +1,26 @@
+<form class="student-form" (ngSubmit) = 'onSubmit()'>
+
+    <div class="form-group">
+    <label for="name">Teacher Name</label>
+    <input
+      id="name"
+      type="text"
+      name="name"
+      [(ngModel)] = 'newTeacher.name'
+      placeholder="Enter teacher name">
+  </div>
+
+   <div class="form-group">
+    <label for="subject">Subject</label>
+    <input
+      id="subject"
+      type="text"
+      name="subject"
+      [(ngModel)] = 'newTeacher.subject'
+      placeholder="Enter subject name">
+  </div>
+  
+     <button type="submit">
+    Save
+  </button>
+</form>

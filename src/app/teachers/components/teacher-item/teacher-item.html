@@ -1,0 +1,48 @@
+<div class="student-card">
+
+    <div class="student-header">
+        <h3>{{ teacher().name }}</h3>
+
+        <span
+            class="status"
+            [class.active]="teacher().isActive"
+            [class.inactive]="!teacher().isActive">
+
+            {{ teacher().isActive ? '🟢 Active' : '🔴 Inactive' }}
+
+        </span>
+    </div>
+
+    <div class="student-info">
+        <p>
+            <strong>Subject:</strong>
+            {{ teacher().subject }}
+        </p>
+
+    </div>
+
+    <div class="student-actions">
+
+        <button
+            class="edit-btn"
+            (click)="edit.emit(teacher())">
+            Edit
+        </button>
+
+        <button
+            class="delete-btn"
+            (click)="delete.emit(teacher().id)">
+            Delete
+        </button>
+
+        <button
+            class="toggle-btn"
+            (click)="toggle.emit(teacher().id)">
+
+            {{ teacher().isActive ? 'Deactivate' : 'Activate' }}
+
+        </button>
+
+    </div>
+
+</div>
