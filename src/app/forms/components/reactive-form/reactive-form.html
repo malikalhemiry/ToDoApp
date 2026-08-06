@@ -1,0 +1,142 @@
+<form [formGroup]="userForm" (ngSubmit)="onSubmit()" novalidate>
+    <label>Name</label>
+    <input formControlName="fullName" type="text">
+    @if(fullName.touched ){
+        @if(fullName.errors?.['required']){
+            <span>Full Name is required</span>
+        }
+        @if(fullName.errors?.['invalidEmployeeCode']){
+             <span>Employee code must start with EMP-</span>
+        }
+    }
+    <label>Email</label>
+    <input formControlName="email" type="email">
+    @if(email.touched){
+        @if(email.errors?.['required']){
+        <span>Email is required</span>
+        }
+        @if(email.errors?.['email']){
+            <span>Invalid email format.</span>
+        }
+    }
+    <label>Age</label>
+    <input formControlName="age" type="number">
+    @if(age.touched){
+        @if(age.errors?.['required']){
+            <span> Age Is Required</span>
+        }
+    }
+    <label>Password</label>
+    <input formControlName="password" type="password">
+    @if(password.touched){
+        @if(password.errors?.['required']){
+            <span>Password is Required</span>
+        }
+        @if(password.errors?.['pattern']){
+            <span>Invalid Password Format</span>
+        }
+    }
+    <label>Password Confirmation </label>
+    <input formControlName="passwordConfirmation" type="password">
+    @if(userForm.errors?.['passwordMismatch'] && passwordConfirmation.touched){
+        <span>Password must be match</span>
+    }
+
+    <label>Agree
+    <input formControlName="improve" type="checkbox">
+    @if(improve.touched && improve.errors?.['requiredTrue']){
+            <span>you must agree to improve</span>
+    }
+    </label>
+<!--     
+    <div formArrayName="phones">
+     <label>Phones
+        <button type="button" (click)="addPhone()">+</button>
+     </label>
+
+        @for(phone of phones.controls;  track $index){
+            <label>
+        <input [formControlName]="$index" type="number"/> 
+        @if(phone.touched){
+            @if(phone.errors?.['required']){
+            <span>Phone is required</span>
+            }
+            @if(phone.errors?.['pattern']){
+                <span>Invalid Phone Format</span>
+            }
+        }
+        <button (click)="deletePhone($index)">-</button>
+        </label>
+        }
+
+        </div> -->
+
+        <div formArrayName="phones">
+            <div class="phones-header">
+                <h3>Phone Numbers</h3>
+                <button class="add-phone-btn"
+                type="button"
+                (click)="addPhone()">
+                + Add Phone
+            </button>
+            </div>
+            @for(phone of phones.controls;  track $index){
+                <div class="phone-card" [formGroupName]="$index">
+                    <div class="phone-card-header">
+                        <h4> Phone #{{ $index + 1 }} </h4>
+                        <button class="delete-phone-btn"
+                         type="button" (click)="deletePhone($index)">Remove</button>
+                    </div>
+                    <div class="phone-fields">
+                        <input formControlName="number" type="number">
+                    <select formControlName="type">
+                        <option value="">Select Type</option>
+                        <option value="Work">Work</option>
+                        <option value="Home">Home</option>
+                        <option value="Mobile">Mobile</option>
+                    </select>
+                    <input formControlName="isPrimary" type="checkbox" > Primary Phone
+                    </div>
+                    
+                </div>
+            }
+        </div>
+    
+    <button type="submit" [disabled]="userForm.invalid">Save</button>
+    
+    
+<hr>
+
+<h3>Debug</h3>
+
+<pre>
+
+{{ userForm.value | json }}
+
+</pre>
+
+<pre>
+
+Valid : {{ userForm.valid }}
+
+</pre>
+
+<pre>
+
+Dirty : {{ userForm.dirty }}
+
+</pre>
+
+<pre>
+
+Touched : {{ userForm.touched }}
+
+</pre>
+
+<pre>
+
+Submitted : {{ userForm.status }}
+
+</pre>
+
+</form>

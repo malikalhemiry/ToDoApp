@@ -1,0 +1,77 @@
+<form [formGroup]="form"
+      (ngSubmit)="submit()">
+
+@for(field of fields; track field.name){
+
+<div>
+
+<label>
+
+{{field.label}}
+
+</label>
+
+@if(field.type === 'text'
+ || field.type === 'email'
+ || field.type === 'number'){
+
+<input
+
+[type]="field.type"
+
+[formControlName]="field.name">
+
+}
+
+@else if(field.type === 'select'){
+
+<select
+[formControlName]="field.name">
+
+@for(option of field.options;
+track option){
+
+<option [value]="option">
+
+{{option}}
+
+</option>
+
+}
+
+</select>
+
+}
+
+@else if(field.type === 'checkbox'){
+
+<input
+
+type="checkbox"
+
+[formControlName]="field.name">
+
+}
+
+@if(form.get(field.name)?.invalid
+&& form.get(field.name)?.touched){
+
+<span>
+
+Required
+
+</span>
+
+}
+
+</div>
+
+}
+
+<button>
+
+Save
+
+</button>
+
+</form>

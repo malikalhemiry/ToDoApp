@@ -1,0 +1,52 @@
+<div class="student-card">
+
+    <div class="student-header">
+        <h3>{{ employee().name }}</h3>
+
+        <span
+            class="status"
+            [class.active]="employee().isActive"
+            [class.inactive]="!employee().isActive">
+
+            {{ employee().isActive ? '🟢 Active' : '🔴 Inactive' }}
+
+        </span>
+    </div>
+
+    <div class="student-info">
+        <p>
+            <strong>Position:</strong>
+            {{ employee().position }}
+        </p>
+         <p>
+            <strong>Salary:</strong>
+            {{ employee().salary }}
+        </p>
+
+    </div>
+
+    <div class="student-actions">
+
+        <button
+            class="edit-btn"
+            (click)="edit.emit(employee())">
+            Edit
+        </button>
+
+        <button
+            class="delete-btn"
+            (click)="delete.emit(employee().id)">
+            Delete
+        </button>
+
+        <button
+            class="toggle-btn"
+            (click)="toggle.emit(employee().id)">
+
+            {{ employee().isActive ? 'Deactivate' : 'Activate' }}
+
+        </button>
+
+    </div>
+
+</div>

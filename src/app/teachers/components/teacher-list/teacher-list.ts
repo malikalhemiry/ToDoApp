@@ -12,6 +12,6 @@ export class TeacherList {
   teachers = input<Teacher[]>([])
 
   edit = output<Teacher>();
-  delete = output<number>();
-  toggle = output<number>();
+  delete = output<string>();
+  toggle = output<string>();
 }

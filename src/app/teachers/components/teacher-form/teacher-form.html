@@ -1,26 +1,31 @@
-<form class="student-form" (ngSubmit) = 'onSubmit()'>
+<form #teacherForm="ngForm" class="student-form" (ngSubmit) = 'onSubmit()'>
 
     <div class="form-group">
     <label for="name">Teacher Name</label>
-    <input
+    <input #nameModel="ngModel" required
       id="name"
       type="text"
       name="name"
       [(ngModel)] = 'newTeacher.name'
       placeholder="Enter teacher name">
   </div>
+  @if(nameModel.invalid && nameModel.touched){
+    <span>يجب ادخال الاسم</span>
+  }
 
    <div class="form-group">
     <label for="subject">Subject</label>
-    <input
+    <input #subjectModel="ngModel" required
       id="subject"
       type="text"
       name="subject"
       [(ngModel)] = 'newTeacher.subject'
       placeholder="Enter subject name">
   </div>
-  
-     <button type="submit">
+  @if(subjectModel.invalid && subjectModel.touched){
+    <span>يجب ادخال المادة</span>
+  }
+     <button type="submit" [disabled]="teacherForm.invalid">
     Save
   </button>
 </form>

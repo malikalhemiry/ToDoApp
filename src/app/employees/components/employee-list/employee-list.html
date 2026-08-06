@@ -1,0 +1,17 @@
+<div class="emp-list">
+    @if(employees.length > 0){ 
+        <p class="empty-msg">🎉 لا يوجد موظفين! أضف موظف جديد.</p>
+    }
+    
+    @for(emp of employees(); track emp.id ){
+        <div>
+            <app-employee-item
+            [employee]="emp",
+            (edit)="edit.emit($event)"
+            (delete)="delete.emit($event)"
+            (toggle)="toggle.emit($event)">
+
+            </app-employee-item>
+        </div>
+    }
+</div>

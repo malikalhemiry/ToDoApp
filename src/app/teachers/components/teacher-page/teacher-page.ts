@@ -12,33 +12,42 @@ import { TeacherList } from "../teacher-list/teacher-list";
 })
 export class TeacherPageComponent implements OnInit {
 
-  teachers!: Signal<Teacher[]>;
+  teachers = signal<Teacher[]>([]); 
 
-  editingTeacher = signal<Teacher | null>(null);
+  editingTeacher = signal<UpdateTeacherDto | null>(null);
 
   constructor(private teacherService : TeacherService){}
   
   ngOnInit(): void {
-    this.teachers = this.teacherService.getTeachers();
+   this.teachers = this.teacherService.getTeachers();
   }
 
   // onShowData() : void {
   //   this.teachers= this.teacherService.getTeachers();
   // } 
 
-  onAdd(dto: CreateTeacherDto){
+  async onAdd(dto: CreateTeacherDto){
      const editing = this.editingTeacher();
      if(editing){
-      this.teacherService.editTeacher(
-        editing.id,
-        dto.name,
-        dto.subject
-      );
-     }
-     else{
-    this.teacherService.addTeacher(
-      dto.name,
-      dto.subject);
+      this.teacherService.editTeacher(editing).subscribe({
+        next: () => {
+        this.teachers.update(teacher =>
+          teacher.map(t=> t.id === editing.id ? 
+            {
+              ...t,
+              name: dto.name,
+              subject: dto.subject
+            } : t));
+        this.editingTeacher.set(null);
+        },
+        error: err => console.log(err),
+        complete: () => console.log(`Teacher with id ${editing.id} Updated successfully.`),
+     });
+    }
+     else
+      {
+    const result  = await this.teacherService.addTeacher(dto);
+    this.teachers.update(currentTeachers => [...currentTeachers, result]);
      }
   }
 
@@ -46,11 +55,27 @@ export class TeacherPageComponent implements OnInit {
     this.editingTeacher.set(teacher);
   }
 
-  onDelete(id: number){
-    this.teacherService.deleteTeacher(id);
+  onDelete(id: string){
+    this.teacherService.deleteTeacher(id).subscribe({
+      next: () => {
+        this.teachers.update(teachers => teachers.filter(x=>x.id !== id));
+      },
+      error: err => console.log(err),
+      complete: () => console.log(`Teacher with id ${id} deleted successfully.`),
+    });
   }
 
-  onToggle(id: number){
-    this.teacherService.toggleTeacher(id);
+  onToggle(id: string){
+    this.teacherService.toggleTeacher(id).subscribe({
+      next: () =>{
+        this.teachers.update(teachers => 
+          teachers.map(t=> t.id === id ? {
+            ...t,
+            isActive: !t.isActive
+          } : t));
+      },
+      error: err => console.log(err),
+      complete: () => console.log(`Teacher with id ${id} Activeted successfully.`),
+    });
   }
 }

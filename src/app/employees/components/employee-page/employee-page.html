@@ -1,0 +1,13 @@
+<h1>Employee Management</h1>
+
+<div class="container">
+    <app-employee-form (add)="onAdd($event)" [editingEmployee]="this.editingEmp()"></app-employee-form>
+
+    <app-employee-list 
+    [employees]="employees()"
+    (edit)="onEdit($event)"
+    (delete)="onDelete($event)"
+    (toggle)="onToggle($event)">
+    </app-employee-list>
+</div>
+    

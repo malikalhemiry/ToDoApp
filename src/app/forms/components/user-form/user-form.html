@@ -1,0 +1,118 @@
+<form #userForm="ngForm" (ngSubmit)="onSubmit()" novalidate>
+
+    <label>
+        <input 
+        #nameModel="ngModel"
+        [(ngModel)] = "userData.fullName"
+        required
+        name="name"
+        type="text"
+        placeholder="Name" />
+        @if(nameModel.invalid && nameModel.touched){
+            <span>Name is required</span>
+        }
+    </label>
+
+    <label>
+        <input 
+        #emailModel="ngModel"
+        [(ngModel)] = "userData.email"
+        required
+        name="email"
+        email
+        placeholder="Enter The Email" />
+        @if(emailModel.touched){
+            
+        @if(emailModel.errors?.['required']){
+            <span>The Email is required</span>
+        }
+        @else if(emailModel.errors?.['email']){
+            <span>Invalid email format.</span>
+        }
+        }
+    </label>
+
+    <label>
+        <input #ageModel="ngModel"
+        [(ngModel)]="userData.age"
+        name="age"
+        type="number"
+        required
+        />
+        @if(ageModel.invalid && ageModel.touched){
+            <span> Age is required</span>
+        }
+    </label>
+
+    <label>
+        <input #passModel="ngModel"
+        [(ngModel)]="userData.password"
+        required
+        name="password"
+        type="text"
+        placeholder="Password"
+        />
+        @if(passModel.invalid && passModel.touched){
+            <span>The Password is required</span>
+        }
+    </label>
+
+    <label>
+        <input #passConfirmModel="ngModel"
+        [(ngModel)]="userData.passwordConfirmation"
+        required
+        name="passwordConfirmation"
+        type="text"
+        />
+        @if(userData.password !== userData.passwordConfirmation && passConfirmModel.touched){
+            <span>password Confirmation dosen`t matches</span>
+        }
+    </label>
+    <label>
+        <input #improveModel="ngModel"
+        [(ngModel)]="userData.improve"
+        name="improve"
+        required
+        type="checkbox"
+        />
+        @if(improveModel.invalid && improveModel.touched){
+            <span>you must agree to improve</span>
+        }
+    </label>
+
+    <button type="submit" [disabled]="userForm.invalid">Save</button>
+<hr>
+
+<h3>Debug</h3>
+
+<pre>
+
+{{ userForm.value | json }}
+
+</pre>
+
+<pre>
+
+Valid : {{ userForm.valid }}
+
+</pre>
+
+<pre>
+
+Dirty : {{ userForm.dirty }}
+
+</pre>
+
+<pre>
+
+Touched : {{ userForm.touched }}
+
+</pre>
+
+<pre>
+
+Submitted : {{ userForm.submitted }}
+
+</pre>
+
+</form>

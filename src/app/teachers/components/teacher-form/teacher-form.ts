@@ -27,7 +27,7 @@ export class TeacherForm {
     subject: ''
   };
 
-  teacher = input<Teacher | null>(null);
+  teacher = input<UpdateTeacherDto | null>(null);
 
   add = output<CreateTeacherDto>();
   
@@ -39,5 +39,6 @@ export class TeacherForm {
          subject: ''
         };
     }
+    console.log(this.newTeacher);
   }
 }

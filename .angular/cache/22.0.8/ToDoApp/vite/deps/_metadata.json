@@ -1,52 +1,64 @@
 {
-  "hash": "6905f32f",
-  "configHash": "95b86cdc",
+  "hash": "c2c29bb8",
+  "configHash": "62d0a0e8",
   "lockfileHash": "c60d7fa8",
-  "browserHash": "d8051547",
+  "browserHash": "ad2fe817",
   "optimized": {
     "@angular/common": {
       "src": "../../../../../../node_modules/@angular/common/fesm2022/common.mjs",
       "file": "@angular_common.js",
-      "fileHash": "a9b3dc9b",
+      "fileHash": "fbe867cf",
       "needsInterop": false
     },
     "@angular/core": {
       "src": "../../../../../../node_modules/@angular/core/fesm2022/core.mjs",
       "file": "@angular_core.js",
-      "fileHash": "2cc0fcc4",
+      "fileHash": "447ee038",
       "needsInterop": false
     },
     "@angular/forms": {
       "src": "../../../../../../node_modules/@angular/forms/fesm2022/forms.mjs",
       "file": "@angular_forms.js",
-      "fileHash": "065b9dd0",
+      "fileHash": "6a911cc2",
       "needsInterop": false
     },
     "@angular/platform-browser": {
       "src": "../../../../../../node_modules/@angular/platform-browser/fesm2022/platform-browser.mjs",
       "file": "@angular_platform-browser.js",
-      "fileHash": "9615cb14",
+      "fileHash": "840074b0",
       "needsInterop": false
     },
     "@angular/router": {
       "src": "../../../../../../node_modules/@angular/router/fesm2022/router.mjs",
       "file": "@angular_router.js",
-      "fileHash": "ef3d0611",
+      "fileHash": "92c0c09f",
       "needsInterop": false
     },
     "rxjs": {
       "src": "../../../../../../node_modules/rxjs/dist/esm5/index.js",
       "file": "rxjs.js",
-      "fileHash": "202af5cf",
+      "fileHash": "35759307",
+      "needsInterop": false
+    },
+    "@angular/common/http": {
+      "src": "../../../../../../node_modules/@angular/common/fesm2022/http.mjs",
+      "file": "@angular_common_http.js",
+      "fileHash": "d8ac5d4b",
       "needsInterop": false
     }
   },
   "chunks": {
-    "chunk-HEU7OBQE": {
-      "file": "chunk-HEU7OBQE.js"
+    "chunk-CXNSZX4Z": {
+      "file": "chunk-CXNSZX4Z.js"
     },
-    "chunk-PICBJF72": {
-      "file": "chunk-PICBJF72.js"
+    "chunk-FL4RHEWR": {
+      "file": "chunk-FL4RHEWR.js"
+    },
+    "chunk-Q3HZXQCM": {
+      "file": "chunk-Q3HZXQCM.js"
+    },
+    "chunk-2YY7AXUL": {
+      "file": "chunk-2YY7AXUL.js"
     },
     "chunk-7TJK32NK": {
       "file": "chunk-7TJK32NK.js"

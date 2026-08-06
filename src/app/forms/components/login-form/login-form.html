@@ -1,0 +1,74 @@
+<form #loginForm="ngForm" (ngSubmit)="onSubmit()" >
+    <input required 
+    #fullNameModel="ngModel"
+    type="text"
+    name="fullName"
+    [(ngModel)]="loginData.fullName"
+    placeholder="Full Name"
+    />
+    @if(fullNameModel.invalid && fullNameModel.touched) {
+        <span class="error">Full Name is required</span>
+    }
+    <input required
+    #emailModel="ngModel"
+    email
+    name="email"
+    [(ngModel)]="loginData.email"
+    placeholder="Email"
+    />
+    
+    @if(emailModel.invalid && emailModel.touched) {
+        <span class="error">Email is required</span>
+    }
+
+    <input required
+    #passwordModel="ngModel"
+    type="password"
+    name="password"
+    [(ngModel)]="loginData.password"
+    placeholder="Password"
+    />
+    @if(passwordModel.invalid && passwordModel.touched) {
+        <span class="error">Password is required</span>
+    }
+    <input required
+    #passwordConfirmationModel="ngModel"
+    type="password"
+    name="passwordConfirmation"
+    [(ngModel)]="loginData.passwordConfirmation"
+    placeholder="Confirm Password"
+    />
+    @if(passwordConfirmationModel.touched &&
+     loginData.password !== loginData.passwordConfirmation) {
+        <span class="error">Password confirmation does not match</span>
+    }
+
+    <input required
+    #ageModel="ngModel"
+    type="number"
+    name="age"
+    [(ngModel)]="loginData.age"
+    placeholder="Age"
+    />
+    @if(ageModel.invalid && ageModel.touched) {
+        <span class="error">Age is required</span>
+    }
+
+    <label>
+        <input type="checkbox"
+        required
+        #termsModel="ngModel"
+        name="improve"
+        [(ngModel)]="loginData.improve"
+        />
+        I want to improve my skills
+
+        @if(termsModel.value !== true ) {
+            <span class="error">You must agree to improve your skills</span>
+        }
+
+    </label>
+
+    <button type="submit" [disabled]="loginForm.invalid">Submit</button>
+</form>
+
