@@ -3,10 +3,10 @@ import { StudentPageComponent } from './pages/student-page/student-page';
 import { TaskPageComponent } from './tasks/components/task-page/task-page';
 import { BookPageComponent } from './pages/book-page/book-page';
 import { TeacherPageComponent } from './teachers/components/teacher-page/teacher-page';
-import { EmployeePageComponent } from './employees/components/employee-page/employee-page';
 import { DynamicForm } from './forms/components/dynamic-form/dynamic-form';
 import { UserForm } from './forms/components/user-form/user-form';
 import { ReactiveFormComponent } from './forms/components/reactive-form/reactive-form';
+import { EmployeePage } from './employees/components/employee-page/employee-page';
 
 export const routes: Routes = [
      {
@@ -37,7 +37,7 @@ export const routes: Routes = [
 
     {
         path: 'employees',
-        component: EmployeePageComponent
+        component: EmployeePage
     },
     
     {

@@ -1,33 +1,650 @@
-<form class="emp-form" (ngSubmit) = 'onSubmit()'>
+<form [formGroup]="empForm" (ngSubmit)="onSubmit()" novalidate>
+<section class="employee-form">
 
-    <div class="form-group">
-    <label>Employee Name</label>
-    <input
-      type="text"
-      name="employee"
-      [(ngModel)] = 'newEmployee.name'
-      placeholder="Enter Employee name">
-  </div>
+  <!-- Form Header -->
 
-   <div class="form-group">
-    <label>Position</label>
-    <input
-      type="text"
-      name="position"
-      [(ngModel)] = 'newEmployee.position'
-      placeholder="Enter Position">
-  </div>
+  <header class="form-header">
 
-   <div class="form-group">
-    <label>Salary</label>
-    <input
-      type="text"
-      name="salary"
-      [(ngModel)] = 'newEmployee.salary'
-      placeholder="Enter Salary">
-  </div>
-  
-     <button type="submit">
-    Save
-  </button>
+    <div>
+      <h2>Employee Information</h2>
+
+      <p>
+        Create and manage employee details
+      </p>
+    </div>
+
+    <span class="form-mode">
+      New Employee
+    </span>
+
+  </header>
+
+
+  <!-- =========================
+       Personal Information
+  ========================== -->
+
+  <section class="form-section">
+
+    <div class="section-title">
+
+      <div class="section-number">
+        1
+      </div>
+
+      <div>
+        <h3>Personal Information</h3>
+        <p>Basic employee information</p>
+      </div>
+
+    </div>
+
+    <div class="form-grid">
+
+      <div class="form-field">
+
+        <label>
+          Employee Code
+          <span>*</span>
+        </label>
+
+        <input
+          type="text"
+          placeholder="EMP-1001"
+          formControlName="employeeCode"
+        />
+
+          @if(employeeCode.pending){
+            <span class="span-check">Employee Code Checking ......</span>
+          }
+          @else if (employeeCode.errors?.['employeeCodeExists']) {
+            <span class="span-error">Employee Code Exist</span>
+          }
+        @if(employeeCode.touched){
+          @if(employeeCode.errors?.['required']){
+            <span class="span-error">Employee Code is required</span>
+          }
+          @if(employeeCode.errors?.['employeeCodeInvalid']){
+            <span class="span-error">Employee Code Invalid Pattern</span>
+          }
+        }
+
+        <small>
+          Example: EMP-1001
+        </small>
+
+      </div>
+
+
+      <div class="form-field">
+
+        <label>
+          Full Name
+          <span>*</span>
+        </label>
+
+        <input
+          type="text"
+          placeholder="Enter full name"
+          formControlName="fullName"
+          minlength="3"
+        />
+         @if(fullName.touched){
+          @if(fullName.errors?.['required']){
+            <span class="span-error">Full Name is required</span>
+          }
+          @if(fullName.errors?.['minlength'] || fullName.errors?.['maxlength']){
+            <span class="span-error">The name length must be between 3 and 100</span>
+          }
+        }
+
+      </div>
+
+
+      <div class="form-field">
+
+        <label>
+          Email
+          <span>*</span>
+        </label>
+
+        <input
+          type="email"
+          placeholder="employee@example.com"
+          formControlName="email"
+        />
+        @if(email.touched){
+          @if(email.errors?.['required']){
+            <span class="span-error">Email is required</span>
+          }
+          @if(email.errors?.['email']){
+            <span class="span-error">Invalid Email Pattern</span>
+          }
+        }
+
+      </div>
+
+
+      <div class="form-field">
+
+        <label>
+          Age
+          <span>*</span>
+        </label>
+
+        <input
+          type="number"
+          placeholder="Age"
+          formControlName="age"
+        />
+        @if(age.touched){
+          @if(age.errors?.['required']){
+            <span class="span-error">age is required</span>
+          }
+          @if(age.errors?.['min'] || age.errors?.['max']){
+            <span class="span-error">Your age must be between 18 and 65 years old</span>
+          }
+        }
+      </div>
+
+
+      <div class="form-field">
+
+        <label>
+          Department
+          <span>*</span>
+        </label>
+
+        <select formControlName="department">
+
+          <option value="">
+            Select Department
+          </option>
+          <option value="IT">IT</option>
+          <option value="Finance">Finance</option>
+          <option value="HR">HR</option>
+          <option value="Management">Management</option>
+          <option value="Sales">Sales</option>
+
+        </select>
+        @if(department.touched && department.errors?.['required']){
+            <span class="span-error">Department is required</span>
+        }
+
+      </div>
+
+
+      <div class="form-field">
+
+        <label>
+          Position
+          <span>*</span>
+        </label>
+
+        <select formControlName="position">
+
+          <option value="">
+            Select Position
+          </option>
+
+          <option value="Developer">Developer</option>
+          <option value="Senior Developer">Senior Developer</option>
+          <option value="Manager">Manager</option>
+          <option value="Accountant">Accountant</option>
+          <option value="HR Specialist">HR Specialist</option>
+          <option value="Sales Representative">Sales Representative</option>
+
+        </select>
+
+        @if(position.touched && position.errors?.['required']){
+            <span class="span-error">Position is required</span>
+        }
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- =========================
+       Address
+  ========================== -->
+
+  <section class="form-section">
+
+    <div class="section-title">
+
+      <div class="section-number">
+        2
+      </div>
+
+      <div>
+        <h3>Address</h3>
+        <p>Employee residential information</p>
+      </div>
+
+    </div>
+
+
+    <div class="form-grid" formGroupName="address">
+      <div class="form-field">
+
+        <label>
+          Country
+          <span>*</span>
+        </label>
+
+        <input
+          type="text"
+          placeholder="Country"
+          formControlName="country"
+        />
+        @if(address.controls.country.touched && address.controls.country.errors?.['required']){
+            <span class="span-error">Country is required</span>
+          }
+
+      </div>
+
+
+      <div class="form-field">
+
+        <label>
+          City
+          <span>*</span>
+        </label>
+
+        <input
+          type="text"
+          placeholder="City"
+          formControlName="city"
+        />
+
+        @if(address.controls.city.touched && address.controls.city.errors?.['required']){
+            <span class="span-error">City is required</span>
+          }
+
+      </div>
+
+
+      <div class="form-field form-field-wide">
+
+        <label>
+          Street
+          <span>*</span>
+        </label>
+
+        <input
+          type="text"
+          placeholder="Street address"
+          formControlName="street"
+        />
+
+        @if(address.controls.street.touched && address.controls.street.errors?.['required']){
+            <span class="span-error">City is required</span>
+          }
+      </div>
+
+
+      <div class="form-field">
+
+        <label>
+          Postal Code
+          <span>*</span>
+        </label>
+
+        <input
+          type="number"
+          placeholder="Postal code"
+          formControlName="postalCode"
+        />
+
+        @if(address.controls.postalCode.touched && address.controls.postalCode.errors?.['required']){
+            <span class="span-error">Postal Code is required</span>
+          }
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       Phones
+  ========================== -->
+
+  <section class="form-section">
+
+    <div class="section-title section-title-with-action">
+
+      <div class="section-title-content">
+
+        <div class="section-number">
+          {{phones.length}}
+        </div>
+
+        <div>
+          <h3>Phone Numbers</h3>
+          <p>Employee contact numbers</p>
+        </div>
+
+      </div>
+
+
+      <button
+        type="button"
+        class="secondary-button"
+        (click)="addPhone()"
+      >
+        + Add Phone
+      </button>
+
+    </div>
+
+
+    <div class="dynamic-list" formArrayName="phones">
+
+      <!-- Phone -->
+       @for (phone of phones.controls; track phone) {
+        <pre>
+          {{ phone.value | json }}
+        </pre>
+
+      <div class="dynamic-row" [formGroupName]="$index">
+
+        <div class="form-field">
+
+          <label>
+            Phone Number
+          </label>
+
+          <input
+            type="tel"
+            /* [value]="phone.controls.number.value" */
+            placeholder="77xxxxxxx"
+            formControlName="number"
+          />
+          @if(phone.controls.number.touched){
+            @if(phone.controls.number.errors?.['required']){
+            <span class="span-error">Phone number is required</span>
+            }
+            @if(phone.controls.number.errors?.['pattern']){
+            <span class="span-error">Phone number pattern is invalid</span>
+            }
+          }
+
+        </div>
+
+        <div class="form-field">
+
+          <label>
+            Type
+          </label>
+
+          <select formControlName="type">
+
+            <option value="">
+              Select Type
+            </option>
+
+            <option value="Mobile">Mobile</option>
+            <option value="Home">Home</option>
+            <option value="Work">Work</option>
+
+          </select>
+
+          @if(phone.controls.type.touched){
+            @if(phone.controls.type.errors?.['required']){
+            <span class="span-error">Phone type is required</span>
+            }
+          }
+
+        </div>
+
+        <label class="checkbox-field">
+
+          <input
+            type="checkbox"
+            formControlName="isPrimary"
+            (change)="onPrimaryPhoneChange($index)"
+          />
+
+          <span>
+            Primary
+          </span>
+
+        </label>
+
+
+        <button
+          type="button"
+          class="remove-button"
+          (click)="removePhone($index)"
+        >
+          −
+        </button>
+
+      </div>
+
+      @if (phones.touched && phones.errors?.['singlePrimary']) {
+        <span class="span-error">Only one phone can be primary</span>
+      }
+    }
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       Skills
+  ========================== -->
+
+  <section class="form-section">
+
+    <div class="section-title section-title-with-action">
+
+      <div class="section-title-content">
+
+        <div class="section-number">
+          4
+        </div>
+
+        <div>
+          <h3>Skills</h3>
+          <p>Employee technical and professional skills</p>
+        </div>
+
+      </div>
+
+
+      <button
+        type="button"
+        class="secondary-button"
+        (click)="addSkill()"
+      >
+        + Add Skill
+      </button>
+
+    </div>
+
+
+    <div class="dynamic-list" formArrayName="skills">
+
+      @for (skill of skills.controls; track skill) {
+      <div class="dynamic-row" [formGroupName]="$index">
+
+        <div class="form-field">
+
+          <label>
+            Skill
+          </label>
+
+          <input
+            type="text"
+            placeholder="e.g. Angular"
+            formControlName="name"
+          />
+          @if(skill.controls.name.touched && skill.controls.name.errors?.['required']){
+            <span class="span-error">Skill Name is required</span>
+          }
+        </div>
+
+
+        <div class="form-field">
+
+          <label>
+            Level
+          </label>
+
+          <select formControlName="level">
+
+            <option value="">
+              Select Level
+            </option>
+
+            <option>Beginner</option>
+            <option>Intermediate</option>
+            <option>Advanced</option>
+            <option>Expert</option>
+
+          </select>
+
+          @if(skill.controls.level.touched && skill.controls.level.errors?.['required']){
+            <span class="span-error">Skill Level is required</span>
+          }
+
+        </div>
+
+
+        <div class="form-field years-field">
+
+          <label>
+            Years
+          </label>
+
+          <input
+            type="number"
+            min="0"
+            placeholder="0"
+            formControlName="years"
+          />
+
+          @if(skill.controls.years.touched) {
+            @if(skill.controls.years.errors?.['required']){
+            <span class="span-error">Skill years is required</span>
+            }
+
+            @if(skill.controls.years.errors?.['min'] || skill.controls.years.errors?.['max']){
+            <span class="span-error">Skill years not bigger than 50 Years</span>
+            }
+          }
+        </div>
+
+
+        <button
+          type="button"
+          class="remove-button"
+          (click)="deleteSkill($index)"
+        >
+          −
+        </button>
+
+      </div>
+    }
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       Account
+  ========================== -->
+
+  <section class="form-section">
+
+    <div class="section-title">
+
+      <div class="section-number">
+        5
+      </div>
+
+      <div>
+        <h3>Account Security</h3>
+        <p>Employee login credentials</p>
+      </div>
+
+    </div>
+
+
+    <div class="form-grid">
+
+      <div class="form-field">
+
+        <label>
+          Password
+          <span>*</span>
+        </label>
+
+        <input
+          type="password"
+          placeholder="Enter password"
+          formControlName="password"
+        />
+        @if(password.touched && password.errors?.['required']){
+          <span class="span-error">Password is required</span>
+        }
+
+      </div>
+
+
+      <div class="form-field">
+
+        <label>
+          Confirm Password
+          <span>*</span>
+        </label>
+
+        <input
+          type="password"
+          placeholder="Confirm password"
+          formControlName="confirmPassword"
+        />
+
+        @if(confirmPassword.touched && empForm.errors?.['requiredMatch']){
+          <span class="span-error">Password isn`t matches</span>
+        }
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       Form Footer
+  ========================== -->
+
+  <footer class="form-footer">
+
+    <button
+      type="button"
+      class="cancel-button"
+    >
+      Cancel
+    </button>
+
+
+    <button
+      type="submit"
+      class="save-button"
+      [disabled]="empForm.invalid"
+    >
+      Save Employee
+    </button>
+
+  </footer>
+
+</section>
+
 </form>

@@ -5,10 +5,14 @@
         @if(fullName.errors?.['required']){
             <span>Full Name is required</span>
         }
-        @if(fullName.errors?.['invalidEmployeeCode']){
+    }
+    
+        @if(fullName.pending){
+              <span>Checking employee code...</span>
+        }
+        @if(fullName.errors?.['employeeCodeExists']){
              <span>Employee code must start with EMP-</span>
         }
-    }
     <label>Email</label>
     <input formControlName="email" type="email">
     @if(email.touched){
@@ -95,11 +99,19 @@
                         <option value="Home">Home</option>
                         <option value="Mobile">Mobile</option>
                     </select>
-                    <input formControlName="isPrimary" type="checkbox" > Primary Phone
+                    <input formControlName="isPrimary" type="checkbox" (change)="onPrimaryChange($index)"> Primary Phone
                     </div>
                     
                 </div>
             }
+            @if(phones.touched ){
+                @if(phones.errors?.['minPhones']) {
+                <span class="error"> At least one phone number is required.</span>
+            }
+            @if(phones.errors?.['multiplePrimaryPhones']){
+                <span class="error"> At least one phone number is Primary.</span>
+            }
+        }
         </div>
     
     <button type="submit" [disabled]="userForm.invalid">Save</button>

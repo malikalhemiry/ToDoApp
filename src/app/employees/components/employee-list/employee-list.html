@@ -1,17 +1,73 @@
-<div class="emp-list">
-    @if(employees.length > 0){ 
-        <p class="empty-msg">🎉 لا يوجد موظفين! أضف موظف جديد.</p>
-    }
-    
-    @for(emp of employees(); track emp.id ){
-        <div>
-            <app-employee-item
-            [employee]="emp",
-            (edit)="edit.emit($event)"
-            (delete)="delete.emit($event)"
-            (toggle)="toggle.emit($event)">
+<section class="employee-list">
 
-            </app-employee-item>
-        </div>
+  <!-- Header -->
+
+  <div class="list-header">
+
+    <div>
+      <h2>Employees</h2>
+
+      <p>
+        Manage your employees
+      </p>
+    </div>
+
+    <span class="employee-count">
+      {{employees().length}}
+    </span>
+
+  </div>
+
+
+  <!-- Search -->
+
+  <div class="search-box">
+
+    <span class="search-icon">
+      🔍
+    </span>
+
+    <input
+      type="text"
+      placeholder="Search employees..."
+    />
+
+  </div>
+
+
+  <!-- Filters -->
+
+  <div class="filters">
+
+    <select>
+      <option value="">All Departments</option>
+      <option>IT</option>
+      <option>Finance</option>
+      <option>HR</option>
+      <option>Management</option>
+      <option>Sales</option>
+    </select>
+
+    <select>
+      <option value="">All Status</option>
+      <option>Active</option>
+      <option>Inactive</option>
+    </select>
+
+  </div>
+
+
+  <!-- Employee Items -->
+
+  <div class="employee-items">
+    @for (employee of employees(); track $index) {
+    <app-employee-item
+    [employee]="employee"
+    (edit)="edit.emit(employee)"
+    (delete)="delete.emit(employee)"
+    ></app-employee-item>
     }
-</div>
+
+  </div>
+
+</section>

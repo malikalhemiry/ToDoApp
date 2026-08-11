@@ -1,13 +1,97 @@
-<h1>Employee Management</h1>
+<div class="employee-page">
 
-<div class="container">
-    <app-employee-form (add)="onAdd($event)" [editingEmployee]="this.editingEmp()"></app-employee-form>
+  <!-- Page Header -->
+  <header class="page-header">
 
-    <app-employee-list 
-    [employees]="employees()"
-    (edit)="onEdit($event)"
-    (delete)="onDelete($event)"
-    (toggle)="onToggle($event)">
-    </app-employee-list>
+    <div class="page-title">
+      <span class="page-icon">👥</span>
+
+      <div>
+        <h1>Employee Management</h1>
+        <p>Manage employees and their information</p>
+      </div>
+    </div>
+
+    <button class="primary-button">
+      + Add Employee
+    </button>
+
+  </header>
+
+
+  <!-- Page Content -->
+  <main class="page-content">
+
+    <!-- Statistics -->
+    <section class="statistics">
+
+      <div class="stat-card">
+        <div class="stat-icon">👥</div>
+
+        <div>
+          <span class="stat-label">Total Employees</span>
+          <strong>{{_employees().length}}</strong>
+        </div>
+      </div>
+
+
+      <div class="stat-card">
+        <div class="stat-icon">✓</div>
+
+        <div>
+          <span class="stat-label">Active Employees</span>
+          <strong>115</strong>
+        </div>
+      </div>
+
+
+      <div class="stat-card">
+        <div class="stat-icon">🏢</div>
+
+        <div>
+          <span class="stat-label">Departments</span>
+          <strong>8</strong>
+        </div>
+      </div>
+
+
+      <div class="stat-card">
+        <div class="stat-icon">⏳</div>
+
+        <div>
+          <span class="stat-label">Pending</span>
+          <strong>13</strong>
+        </div>
+      </div>
+
+    </section>
+
+
+    <!-- Main Layout -->
+    <section class="workspace">
+
+      <!-- Employee List -->
+      <div class="employee-list-container">
+
+        <app-employee-list 
+        [employees]="_employees()"
+        (edit)="onEdit($event)"
+        (delete)="onDelete($event)"></app-employee-list>
+
+      </div>
+
+
+      <!-- Employee Form -->
+      <div class="employee-form-container">
+
+        <app-employee-form
+        (add)="onSave($event)"
+        [editingEmployee]="editingEmployee()"></app-employee-form>
+
+      </div>
+
+    </section>
+
+  </main>
+
 </div>
-    

@@ -1,18 +1,14 @@
-import { Component, input, output } from '@angular/core';
+import { Component, input, output, signal } from '@angular/core';
 
 @Component({
   selector: 'app-employee-item',
   imports: [],
-  standalone: true,
+  standalone:true,
   templateUrl: './employee-item.html',
   styleUrl: './employee-item.css',
 })
-export class EmployeeItemComponent {
-
+export class EmployeeItem {
   employee = input.required<Employee>();
-
   edit = output<Employee>();
-  delete = output<number>();
-  toggle = output<number>();
-
+  delete = output<Employee>();
 }

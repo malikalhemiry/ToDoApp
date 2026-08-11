@@ -1,49 +1,42 @@
-import { Component, output, signal, Signal } from '@angular/core';
-import { EmployeeService } from '../../service/employee';
-import { FormsModule } from '@angular/forms';
-import { EmployeeFormComponent } from "../employee-form/employee-form";
-import { EmployeeListComponent } from "../employee-list/employee-list";
+import { Component, output, Signal, signal } from '@angular/core';
+import { EmployeeForm } from "../employee-form/employee-form";
+import { EmployeeList } from "../employee-list/employee-list";
+import { EmployeeService } from '../../services/employee';
 
 @Component({
   selector: 'app-employee-page',
-  imports: [FormsModule, EmployeeFormComponent, EmployeeListComponent],
-  standalone: true,
+  imports: [EmployeeForm, EmployeeList],
   templateUrl: './employee-page.html',
   styleUrl: './employee-page.css',
 })
-export class EmployeePageComponent {
-  
-  constructor(private empService: EmployeeService){}
-  employees!: Signal<Employee[]>;
+export class EmployeePage {
 
-  editingEmp = signal<UpdateEmployeeDto | null>(null);
+  _employees!:Signal<Employee[]>;
+  editingEmployee = signal<Employee | null>(null);
+
+  constructor(private _service: EmployeeService){}
 
   ngOnInit(): void {
-    this.employees = this.empService.getEmployees();
+    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
+    //Add 'implements OnInit' to the class.
+   this._employees = this._service.getEmployees();
   }
 
-  onAdd(dto: CreateEmployeeDto){
-    const editing = this.editingEmp();
+  onSave(emp: Employee){
+    const editing = this.editingEmployee();
     if(editing){
-      this.empService.editEmployee(editing);
+    this._service.editEmployee(emp)
+    this.editingEmployee.set(null);
     }
-    this.empService.addEmployee(dto);
+    else{
+    this._service.addEmployee(emp);
+    }
   }
 
   onEdit(emp: Employee){
-    this.editingEmp.set({
-      id: emp.id,
-      name: emp.name,
-      position: emp.position,
-      salary: emp.salary
-    });
+    this.editingEmployee.set(emp);
   }
-
-  onDelete(id: number){
-    this.empService.deleteEmployee(id);
-  }
-
-  onToggle(id: number){
-    this.empService.toggleActive(id);
+  onDelete(emp: Employee){
+    this._service.deleteEmployee(emp.employeeCode);
   }
 }

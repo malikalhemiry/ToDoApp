@@ -1,7 +1,7 @@
 import { JsonPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { isEmp, passwordMatchValidator } from '../../custom-validators/minThreeCharactes';
+import { employeeCodeValidator, isEmp, minPhonesValidator, passwordMatchValidator, singlePrimaryPhoneValidator } from '../../custom-validators/minThreeCharactes';
 
 @Component({
   selector: 'app-reactive-form',
@@ -13,10 +13,10 @@ import { isEmp, passwordMatchValidator } from '../../custom-validators/minThreeC
 export class ReactiveFormComponent {
   userForm = new FormGroup({
 
-    fullName: new FormControl('', [
-      Validators.required,
-      isEmp
-    ]),
+    fullName: new FormControl('', {
+      validators: [Validators.required],
+      asyncValidators: [employeeCodeValidator]
+    }),
 
     email: new FormControl('',
     [
@@ -31,7 +31,7 @@ export class ReactiveFormComponent {
     password: new FormControl('',
       [Validators.required,
         Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/)
-      ]),
+      ]), 
 
     passwordConfirmation: new FormControl('',
       [Validators.required]),
@@ -40,7 +40,10 @@ export class ReactiveFormComponent {
     // phones: new FormArray<FormControl<number|null>>([]) 
     phones: new FormArray<FormGroup>([
       this.createPhoneForm()
-    ])
+    ], [
+      minPhonesValidator(1), 
+      singlePrimaryPhoneValidator
+     ])
   },
 [
   passwordMatchValidator
@@ -71,22 +74,6 @@ private createPhoneForm(){
 
 }
 
-// get phones(){
-//   return this.userForm.controls.phones as FormArray;
-// }
-
-// addPhone(){
-//   this.phones.push(new FormControl('',
-//     [
-//     Validators.required,
-//     Validators.pattern(/^7\d{8}$/)]
-//   ));
-// }
-
-// deletePhone(index: number){
-//   this.phones.removeAt(index);
-// }
-
   get fullName(){
     return this.userForm.controls.fullName;
   }
@@ -113,6 +100,22 @@ private createPhoneForm(){
 
   onSubmit(){
     console.log(this.userForm.value);
+    this.userForm.reset({
+      fullName: '',
+      email: '',
+      age: undefined,
+      improve: false,
+    });
+    this.phones.clear();
+    this.phones.push(this.createPhoneForm());
+  }
+  
+  onPrimaryChange(index: number){
+    this.phones.controls.forEach((phone,i)=>{
+      if(i !== index){
+      phone.get('isPrimary')?.setValue(false);
+      }
+    });
   }
   
 }

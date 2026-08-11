@@ -1,52 +1,61 @@
-<div class="student-card">
+<article class="employee-item">
 
-    <div class="student-header">
-        <h3>{{ employee().name }}</h3>
+  <!-- Avatar -->
 
-        <span
-            class="status"
-            [class.active]="employee().isActive"
-            [class.inactive]="!employee().isActive">
+  <div class="avatar">
+    AA
+  </div>
 
-            {{ employee().isActive ? '🟢 Active' : '🔴 Inactive' }}
 
-        </span>
-    </div>
+  <!-- Employee Information -->
 
-    <div class="student-info">
-        <p>
-            <strong>Position:</strong>
-            {{ employee().position }}
-        </p>
-         <p>
-            <strong>Salary:</strong>
-            {{ employee().salary }}
-        </p>
+  <div class="employee-info">
+
+    <div class="employee-name-row">
+
+      <h3>
+        {{employee()?.fullName}}
+      </h3>
+
+      <span class="status active">
+        Active
+      </span>
 
     </div>
 
-    <div class="student-actions">
+    <p class="employee-code">
+        {{employee()?.employeeCode}}
+    </p>
 
-        <button
-            class="edit-btn"
-            (click)="edit.emit(employee())">
-            Edit
-        </button>
+    <p class="employee-position">
+        {{employee()?.position}}
+    </p>
 
-        <button
-            class="delete-btn"
-            (click)="delete.emit(employee().id)">
-            Delete
-        </button>
+  </div>
 
-        <button
-            class="toggle-btn"
-            (click)="toggle.emit(employee().id)">
 
-            {{ employee().isActive ? 'Deactivate' : 'Activate' }}
+  <!-- Actions -->
 
-        </button>
+  <div class="item-actions">
 
-    </div>
+    <button
+      type="button"
+      class="icon-button"
+      title="Edit"
+      (click)="edit.emit(employee())"
+    >
+      ✏
+    </button>
 
-</div>
+    <button
+      type="button"
+      class="icon-button delete"
+      title="Delete"
+      (click)="delete.emit(employee())"
+    >
+      🗑
+    </button>
+
+  </div>
+
+</article>
