@@ -1,0 +1,49 @@
+<div class="table-container">
+
+  <table>
+
+    <thead>
+      @for (headGroup of table.getHeaderGroups(); track headGroup.id) {
+
+        <tr>
+
+          @for (header of headGroup.headers; track header.id) {
+
+            <th>
+              {{ header.column.columnDef.header }}
+            </th>
+
+          }
+
+        </tr>
+
+      }
+    </thead>
+
+    <tbody>
+
+      @for (row of table.getRowModel().rows; track row.id) {
+
+        <tr>
+
+          @for (cell of row.getAllCells(); track cell.id) {
+
+            <td>
+
+              <ng-container *flexRenderCell="cell; let value">
+                {{ value }}
+              </ng-container>
+
+            </td>
+
+          }
+
+        </tr> 
+
+      }
+
+    </tbody>
+
+  </table>
+
+</div>

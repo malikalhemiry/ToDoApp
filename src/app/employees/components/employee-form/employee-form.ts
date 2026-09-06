@@ -5,7 +5,7 @@ import { JsonPipe } from '@angular/common';
 
 @Component({
   selector: 'app-employee-form',
-  imports: [ReactiveFormsModule,JsonPipe],
+  imports: [ReactiveFormsModule, JsonPipe],
   standalone: true,
   templateUrl: './employee-form.html',
   styleUrl: './employee-form.css',

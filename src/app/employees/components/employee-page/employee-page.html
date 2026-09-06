@@ -66,19 +66,33 @@
 
     </section>
 
+    <section>
+      <br>
+      <app-employee-grid
+      [employees]="_employees()"></app-employee-grid>
+      <br>
+    </section>
+
+    <!-- <section>
+        <app-employee-table 
+        [employees]="_employees()"
+        (edit)="onEdit($event)"
+        (delete)="onDelete($event)"></app-employee-table>
+
+    </section> -->
 
     <!-- Main Layout -->
-    <section class="workspace">
+    <section>
 
       <!-- Employee List -->
-      <div class="employee-list-container">
+      <!-- <div class="employee-list-container">
 
         <app-employee-list 
         [employees]="_employees()"
         (edit)="onEdit($event)"
         (delete)="onDelete($event)"></app-employee-list>
 
-      </div>
+      </div> -->
 
 
       <!-- Employee Form -->

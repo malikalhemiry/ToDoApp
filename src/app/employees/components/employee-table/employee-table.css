@@ -1,0 +1,99 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+.table-container {
+  width: 100%;
+  overflow-x: auto;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  background: #ffffff;
+}
+
+table {
+  width: 100%;
+  min-width: 900px;
+  border-collapse: collapse;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+}
+
+/* =========================
+   Header
+   ========================= */
+
+thead {
+  background: #f8fafc;
+}
+
+th {
+  padding: 14px 16px;
+  text-align: left;
+  font-weight: 600;
+  color: #374151;
+  border-bottom: 2px solid #e5e7eb;
+  white-space: nowrap;
+}
+
+/* =========================
+   Body
+   ========================= */
+
+td {
+  padding: 13px 16px;
+  color: #4b5563;
+  border-bottom: 1px solid #f0f1f3;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+tbody tr {
+  transition: background-color 0.15s ease;
+}
+
+tbody tr:hover {
+  background: #f8fafc;
+}
+
+tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* =========================
+   First column
+   ========================= */
+
+th:first-child,
+td:first-child {
+  font-weight: 600;
+  color: #111827;
+}
+
+/* =========================
+   Empty table
+   ========================= */
+
+tbody:empty::after {
+  content: "No employees found";
+  display: table-cell;
+  padding: 30px;
+  text-align: center;
+  color: #9ca3af;
+}
+
+/* =========================
+   Responsive
+   ========================= */
+
+@media (max-width: 768px) {
+  .table-container {
+    border-radius: 6px;
+  }
+
+  th,
+  td {
+    padding: 11px 12px;
+    font-size: 13px;
+  }
+}

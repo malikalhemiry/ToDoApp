@@ -9,7 +9,7 @@ export class EmployeeService {
     employeeCode: 'EMP-001',
     fullName: 'Ahmed Mohammed',
     email: 'ahmed.mohammed@example.com',
-    age: 29,
+    age: null,
     department: 'IT',
     position: 'Developer',
 

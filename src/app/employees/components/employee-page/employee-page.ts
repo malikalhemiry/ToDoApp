@@ -1,11 +1,11 @@
 import { Component, output, Signal, signal } from '@angular/core';
 import { EmployeeForm } from "../employee-form/employee-form";
-import { EmployeeList } from "../employee-list/employee-list";
-import { EmployeeService } from '../../services/employee';
+import { EmployeeService } from '../../Services/employee';
+import { EmployeeGrid } from "../employee-grid/employee-grid";
 
 @Component({
   selector: 'app-employee-page',
-  imports: [EmployeeForm, EmployeeList],
+  imports: [EmployeeForm, EmployeeGrid],
   templateUrl: './employee-page.html',
   styleUrl: './employee-page.css',
 })
