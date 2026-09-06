@@ -1,16 +1,120 @@
 
   <h1>إدارة المعلميين</h1>
-  <div class="container">
-    @defer (on timer(500ms)) {
-    <app-teacher-form (add)="onAdd($event)" [teacher]="editingTeacher()"/>
+  
 
+  <div class="debug-tools">
+
+  <!-- Prefetch -->
+  <button
+    (click)="getTeacherQuery()"
+  >
+    get All Teachers
+  </button>
+
+  <button
+    (click)="prefetchTeacher('5c976b09-69d9-4caa-8c2b-54e45a994ba9')"
+  >
+    Prefetch Teacher
+  </button>
+
+
+  <!-- Fetch -->
+  <button
+    (click)="fetchTeacher('5c976b09-69d9-4caa-8c2b-54e45a994ba9')"
+  >
+    Fetch Teacher
+  </button>
+
+
+  <!-- Ensure -->
+  <button
+    (click)="ensureTeacher('5c976b09-69d9-4caa-8c2b-54e45a994ba9')"
+  >
+    Ensure Teacher
+  </button>
+
+
+  <!-- Read Cache -->
+  <button
+    (click)="getTeacherFromCache('5c976b09-69d9-4caa-8c2b-54e45a994ba9')"
+  >
+    Get From Cache
+  </button>
+
+
+  <!-- Remove Cache -->
+  <button
+    (click)="removeTeacherFromCache('5c976b09-69d9-4caa-8c2b-54e45a994ba9')"
+  >
+    Remove From Cache
+  </button>
+
+</div>
+
+
+<button
+  [disabled]="page() === 1"
+  (click)="page.update(p => p - 1)"
+>
+  Previous
+</button>
+
+<span>
+  Page {{ page() }}
+</span>
+
+<button
+  [disabled]="
+    page() * pageSize() >= teacherQuery.data()?.totalCount!
+  "
+  (click)="page.update(p => p + 1)"
+>
+  Next
+</button>
+
+  <div class="container">
+    <app-teacher-form (add)="onAdd($event)" [teacher]="editingTeacher()"/>
+    @if(teacherQuery.isPending()){
+      <span>Lodaing .......</span>
+    }
+    @if (deleteTeacherMutation.isPending()) {
+      <p>Deleting...</p>
+    }
+    @else if (deleteTeacherMutation.isSuccess()) {
+      <p>Teacher deleted successfully.</p>
+    }
+    @else if(deleteTeacherMutation.isError()){
+      <span>Error {{deleteTeacherMutation.error().message}} </span>
+    }
+    <!-- @for(page of teacherInfiniteQuery.data()?.pages ?? []; track $index){ -->
     <app-teacher-list 
-        [teachers]="teachers()"
+        [teachers]="teacherQuery.data()?.items ?? []"
         (edit)="onEdit($event)"
         (delete)="onDelete($event)"
         (toggle)="onToggle($event)" />
-    }@placeholder {
-      <div>Loding....</div>
+    <!-- } -->
+    <!-- <button
+    (click)="loadMore()"
+    [disabled]="!teacherInfiniteQuery.hasNextPage()" >
+    @if(teacherInfiniteQuery.isFetchingNextPage()){ 
+      <p>Loading more teachers...</p>
+    } @else{
+     Load More 
     }
+    </button>
 
+    
+    <button
+    (click)="teacherInfiniteQuery.fetchPreviousPage()"
+    [disabled]="!teacherInfiniteQuery.hasPreviousPage() || teacherInfiniteQuery.isFetchingPreviousPage()" >
+    @if(teacherInfiniteQuery.hasPreviousPage()){ 
+      <p>Previous</p>
+    } @else{
+      ...
+    }
+    </button> -->
+
+    <!-- <button (click)="printInfinteData()">Print Infinte Data</button> -->
+
+    
 </div>

@@ -1,6 +1,7 @@
 import { Component, input, output } from '@angular/core';
 import { TeacherForm } from "../teacher-form/teacher-form";
 import { TeacherItem } from "../teacher-item/teacher-item";
+import { TeacherPage } from '../../model/TeacherPage';
 
 @Component({
   selector: 'app-teacher-list',
