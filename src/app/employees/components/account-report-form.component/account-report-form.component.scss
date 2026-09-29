@@ -1,0 +1,344 @@
+// ============================================================
+// Modern Design Variables
+// ============================================================
+$font-stack:       system-ui, -apple-system, "Segoe UI", Roboto, "Cairo", Tahoma, sans-serif;
+$font-size:        13px;
+
+$c-bg:             #f8fafc;
+$c-panel:          #ffffff;
+$c-panel-border:   #cbd5e1;
+$c-text:           #0f172a;
+$c-muted:          #64748b;
+$c-border:         #94a3b8;
+$c-input-bg:       #ffffff;
+
+// Accents
+$c-primary:        #2563eb;
+$c-primary-hover:  #1d4ed8;
+$c-accent:         #1d4ed8; // Highlighted fields blue
+$c-danger:         #ef4444;
+
+// Save button theme
+$c-save-bg:        #e0f2fe;
+$c-save-border:    #38bdf8;
+$c-save-text:      #0369a1;
+
+$control-h:        30px;
+$gap:              10px;
+
+// ============================================================
+// Mixins
+// ============================================================
+@mixin mobile {
+  @media (max-width: 680px) { @content; }
+}
+
+@mixin control-base {
+  height: $control-h;
+  padding: 0 8px;
+  font-family: inherit;
+  font-size: inherit;
+  color: $c-text;
+  background-color: $c-input-bg;
+  border: 1px solid $c-border;
+  border-radius: 6px;
+  box-sizing: border-box;
+  transition: all 0.2s ease;
+
+  &:hover {
+    border-color: $c-primary;
+  }
+
+  &:focus {
+    outline: none;
+    border-color: $c-primary;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+  }
+}
+
+// ============================================================
+// Host & Layout
+// ============================================================
+:host {
+  display: block;
+  font-family: $font-stack;
+  font-size: $font-size;
+  color: $c-text;
+  background-color: $c-bg;
+  padding: 24px 12px;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+.account-form {
+  max-width: 740px;
+  margin: 0 auto;
+}
+
+.panel {
+  position: relative;
+  margin: 0;
+  padding: 18px 20px 20px;
+  background: $c-panel;
+  border: 1px solid $c-panel-border;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+
+  &__title {
+    padding: 0 8px;
+    font-weight: 700;
+    font-size: 14px;
+    color: $c-primary;
+    background: $c-panel;
+  }
+}
+
+// ============================================================
+// Grid Layout
+// ============================================================
+.grid {
+  display: grid;
+  grid-template-columns: 140px 140px minmax(160px, 1fr) 75px 115px;
+  gap: $gap;
+  align-items: center;
+
+  @include mobile {
+    grid-template-columns: repeat(2, 1fr);
+    .check { grid-column: 1 / -1; }
+  }
+}
+
+.row-end {
+  margin-top: 14px;
+}
+
+// ============================================================
+// Labels & Checkboxes
+// ============================================================
+.lbl {
+  font-weight: 600;
+  color: $c-muted;
+  white-space: nowrap;
+}
+
+.check {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  user-select: none;
+
+  input {
+    width: 15px;
+    height: 15px;
+    margin: 0;
+    accent-color: $c-primary;
+    cursor: pointer;
+  }
+}
+
+// ============================================================
+// Inputs & Selects
+// ============================================================
+.control {
+  @include control-base;
+  width: 100%;
+
+  &--center { text-align: center; }
+
+  &--date {
+    direction: ltr;
+    text-align: center;
+    font-variant-numeric: tabular-nums;
+  }
+
+  &.ng-invalid.ng-touched {
+    border-color: $c-danger;
+    background-color: rgba(239, 68, 68, 0.03);
+  }
+}
+
+select.control {
+  appearance: none;
+  padding-left: 28px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: left 8px center;
+  cursor: pointer;
+}
+
+// Modern Highlighted Pills (Blue fields)
+input.control.is-highlight {
+  color: #ffffff;
+  background-color: $c-accent;
+  border-color: $c-accent;
+  font-weight: 600;
+  box-shadow: 0 2px 4px rgba(29, 78, 216, 0.2);
+
+  &:hover { background-color: #1e40af; }
+  &:focus { box-shadow: 0 0 0 3px rgba(29, 78, 216, 0.3); }
+}
+
+select.control.is-highlight {
+  color: #ffffff;
+  font-weight: 600;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E"),
+    linear-gradient($c-accent, $c-accent);
+  background-repeat: no-repeat, no-repeat;
+  background-position: left 8px center, right center;
+  background-size: 12px 12px, calc(100% - 24px) 100%;
+  border-color: $c-accent;
+  box-shadow: 0 2px 4px rgba(29, 78, 216, 0.2);
+
+  option { color: $c-text; background: #ffffff; font-weight: normal; }
+}
+
+// ============================================================
+// Buttons
+// ============================================================
+.btn {
+  min-width: 110px;
+  height: 32px;
+  padding: 0 16px;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: 600;
+  color: $c-text;
+  background: #ffffff;
+  border: 1px solid $c-border;
+  border-radius: 6px;
+  cursor: pointer;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  transition: all 0.2s ease;
+
+  &:hover:not(:disabled) {
+    background: #f1f5f9;
+    border-color: $c-primary;
+    color: $c-primary;
+    transform: translateY(-1px);
+  }
+
+  &:active:not(:disabled) {
+    transform: translateY(0);
+    background: #e2e8f0;
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+  }
+
+  &:disabled {
+    color: #94a3b8;
+    background: #f1f5f9;
+    border-color: #e2e8f0;
+    cursor: not-allowed;
+    box-shadow: none;
+  }
+
+  &--primary {
+    background: $c-primary;
+    color: #ffffff;
+    border-color: $c-primary;
+
+    &:hover:not(:disabled) {
+      background: $c-primary-hover;
+      color: #ffffff;
+      border-color: $c-primary-hover;
+    }
+  }
+
+  &--wide {
+    min-width: 160px;
+  }
+
+  &--save {
+    min-width: 90px;
+    background: $c-save-bg;
+    color: $c-save-text;
+    border-color: $c-save-border;
+
+    &:hover:not(:disabled) {
+      background: #bae6fd;
+      color: #0284c7;
+      border-color: #0ea5e9;
+    }
+  }
+}
+
+// ============================================================
+// Footer Layout
+// ============================================================
+.footer {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid #e2e8f0;
+
+  @include mobile {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  &__group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+
+    &--center {
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    &--end {
+      align-items: flex-start;
+    }
+  }
+}
+
+.choices-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.choices {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+// ============================================================
+// Toast Notification
+// ============================================================
+.toast {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 14px;
+  padding: 8px 12px;
+  font-weight: 600;
+  color: #065f46;
+  background: #ecfdf5;
+  border: 1px solid #a7f3d0;
+  border-radius: 6px;
+  animation: fadeIn 0.25s ease-out;
+
+  &__icon {
+    color: #10b981;
+    flex-shrink: 0;
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}

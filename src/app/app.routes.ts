@@ -7,6 +7,7 @@ import { DynamicForm } from './forms/components/dynamic-form/dynamic-form';
 import { UserForm } from './forms/components/user-form/user-form';
 import { ReactiveFormComponent } from './forms/components/reactive-form/reactive-form';
 import { EmployeePage } from './employees/components/employee-page/employee-page';
+import { AccountReportFormComponent } from './employees/components/account-report-form.component/account-report-form.component';
 
 export const routes: Routes = [
      {
@@ -53,5 +54,9 @@ export const routes: Routes = [
     {
         path: 'reactives',
         component: ReactiveFormComponent
+    },
+    {
+        path: 'reports',
+        component: AccountReportFormComponent
     }
 ];

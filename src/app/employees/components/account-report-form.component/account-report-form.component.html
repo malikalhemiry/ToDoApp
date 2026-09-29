@@ -1,0 +1,124 @@
+<form class="account-form" [formGroup]="form" (ngSubmit)="onMatch()" novalidate>
+  <fieldset class="panel">
+    <legend class="panel__title">حساب واحد</legend>
+
+    <!-- ========== Main Grid ========== -->
+    <div class="grid">
+
+      <!-- Row 1 -->
+      <label class="check">
+        <input type="checkbox" formControlName="detailedBalance">
+        <span>مع رصيد تفصيلي</span>
+      </label>
+
+      <select class="control is-highlight" formControlName="currency" aria-label="العملة">
+        @for (c of currencies; track c.value) {
+          <option [value]="c.value">{{ c.label }}</option>
+        }
+      </select>
+
+      <select class="control" formControlName="documents" aria-label="المستندات">
+        @for (d of documents; track d.value) {
+          <option [value]="d.value">{{ d.label }}</option>
+        }
+      </select>
+
+      <label class="lbl" for="accountNo">رقم الحساب</label>
+      <input class="control" id="accountNo" formControlName="accountNo" inputmode="numeric">
+
+      <!-- Row 2 -->
+      <label class="check">
+        <input type="checkbox" formControlName="localEquivalent">
+        <span>بالمقابل المحلي</span>
+      </label>
+
+      <input class="control is-highlight" formControlName="accountName" aria-label="اسم الحساب">
+
+      <input class="control control--center" formControlName="subAccountNo"
+             inputmode="numeric" aria-label="رقم الحساب الفرعي">
+
+      <label class="lbl" for="uniqueNo">الرقم المميز</label>
+      <input class="control" id="uniqueNo" formControlName="uniqueNo" inputmode="numeric">
+
+      <!-- Row 3 -->
+      <label class="check">
+        <input type="checkbox" formControlName="noPreviousBalance">
+        <span>بدون رصيد سابق</span>
+      </label>
+
+      <select class="control is-highlight" formControlName="period" aria-label="الفترة">
+        @for (p of periods; track p.value) {
+          <option [value]="p.value">{{ p.label }}</option>
+        }
+      </select>
+
+      <input class="control control--date" type="date" formControlName="date" aria-label="التاريخ">
+    </div>
+
+    <!-- Group by day row -->
+    <div class="row-end">
+      <label class="check">
+        <input type="checkbox" formControlName="groupByDay">
+        <span>تجميع باليوم</span>
+      </label>
+    </div>
+
+    <!-- ========== Footer Actions ========== -->
+    <div class="footer">
+
+      <!-- Right Block -->
+      <div class="footer__group">
+        <button type="button" class="btn btn--wide" (click)="sendReport()">
+          إرسال التقرير إلى العميل
+        </button>
+
+        <div class="choices-row">
+          <div class="choices">
+            <label class="check">
+              <input type="radio" formControlName="viewType" value="totals"> مجاميع
+            </label>
+            <label class="check">
+              <input type="radio" formControlName="viewType" value="balances"> أرصدة
+            </label>
+          </div>
+          <label class="check">
+            <input type="checkbox" formControlName="groupByDocument"> تجميع بالمستند
+          </label>
+        </div>
+
+        <div class="choices">
+          <label class="check">
+            <input type="radio" formControlName="status" value="current"> جاري
+          </label>
+          <label class="check">
+            <input type="radio" formControlName="status" value="historical"> تاريخي
+          </label>
+        </div>
+      </div>
+
+      <!-- Middle Block -->
+      <div class="footer__group footer__group--center">
+        <button type="submit" class="btn btn--primary">مطابقة</button>
+        <button type="button" class="btn btn--secondary" [disabled]="!matched()" (click)="showJournal()">
+          عرض اليومية
+        </button>
+      </div>
+
+      <!-- Left Block -->
+      <div class="footer__group footer__group--end">
+        <button type="button" class="btn btn--save" (click)="saveTemplate()">حفظ القالب</button>
+        <label class="check">
+          <input type="checkbox" formControlName="englishReport"> تقرير إنجليزي
+        </label>
+      </div>
+
+    </div>
+
+    @if (message(); as msg) {
+      <div class="toast" role="status">
+        <svg class="toast__icon" viewBox="0 0 24 24" width="16" height="16"><path fill="currentColor" d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+        <span>{{ msg }}</span>
+      </div>
+    }
+  </fieldset>
+</form>
